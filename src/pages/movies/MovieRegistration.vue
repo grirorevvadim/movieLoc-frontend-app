@@ -1,1 +1,1 @@
-<template></template>
+<template>Movie registration</template>

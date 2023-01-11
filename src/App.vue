@@ -14,11 +14,6 @@ export default {
   },
   data() {
     return {
-      movies: [
-        {id: 't1', movieName: 'Spy', location: 'Budapest'},
-        {id: 't2', movieName: 'MI Fantom Protocol', location: 'Budapest'},
-        {id: 't3', movieName: 'Dune', location: 'Budapest'},
-      ],
       locations: [
         {id: 'u1', locationName: 'Budapest', country: 'Hungary'},
         {id: 'u1', locationName: 'Wien', country: 'Austria'},
