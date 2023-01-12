@@ -22,7 +22,6 @@ export default {
   },
   provide() {
     return {
-      movies: this.movies,
       locations: this.locations,
     };
   }

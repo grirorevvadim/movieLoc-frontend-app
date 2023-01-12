@@ -17,7 +17,7 @@ const router = createRouter({
       component: MoviesList,
     },
     { path: '/movies/register', component: MovieRegistration },
-    { path: '/movies/:id', component: MovieDetails },
+    { path: '/movies/:id', component: MovieDetails, props: true },
     { path: '/connect', component: Connect },
     {
       path: '/locations',
