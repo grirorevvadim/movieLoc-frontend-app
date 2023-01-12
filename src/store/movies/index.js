@@ -6,10 +6,10 @@ export default {
   state() {
     return {
       movies: [
-        { id: 'm1', movieName: 'Spy', location: 'Budapest' },
-        { id: 'm2', movieName: 'MI Fantom Protocol', location: 'Budapest' },
-        { id: 'm3', movieName: 'Dune', location: 'Budapest' },
-        { id: 'm4', movieName: 'World War Z', location: 'Budapest' },
+        { id: 'm1', movieName: 'Spy', location: 'l1' },
+        { id: 'm2', movieName: 'MI Fantom Protocol', location: 'l2' },
+        { id: 'm3', movieName: 'Dune', location: 'l1' },
+        { id: 'm4', movieName: 'World War Z', location: 'l1' },
       ],
     };
   },

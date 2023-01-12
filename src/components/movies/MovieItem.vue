@@ -1,8 +1,7 @@
 <template>
   <li>
     <h3>{{ movieName }}</h3>
-    <h4>Location is: {{ location }}</h4>
-    <div class="location">{{ location }}</div>
+    <h4>Location is: {{ locationName }}</h4>
     <div class="actions">
       <base-button class="outline" link :to="movieDetailsLink"
         >Details</base-button
@@ -17,10 +16,24 @@ import BaseButton from '../ui/BaseButton.vue';
 export default {
   components: { BaseButton },
   props: ['id', 'movieName', 'location'],
+  data() {
+    return {
+      locationObject: null,
+      locationName: '',
+    };
+  },
   computed: {
     movieDetailsLink() {
       return '/movies/' + this.id;
     },
+  },
+  created() {
+    this.locationObject = this.$store.getters['locations/locations'].find(
+      (loc) => loc.id === this.location
+    );
+    if (this.locationObject) {
+      this.locationName = this.locationObject.locationName;
+    }
   },
 };
 </script>
@@ -37,8 +50,8 @@ h3 {
 }
 
 .actions {
-  display:flex;
-  justify-content:flex-end;
+  display: flex;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 </style>
