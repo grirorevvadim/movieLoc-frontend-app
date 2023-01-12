@@ -1,23 +1,29 @@
 <template>
   <section>
     <base-card>
-      <h2>{{ movieName }}</h2>
+      <h2>{{ movie.movieName }}</h2>
       <h3>{{ location }}</h3>
-      <h4>Description</h4>
+      <h4>{{ movie.description }}</h4>
     </base-card>
   </section>
 </template>
 
 <script>
 export default {
-  props: ['id'],
   data() {
     return {
-      movieLocation: null,
+      movie: null,
     };
   },
-  created(){
-    // this.movieLocation = this.$store.getters['locations/locations'].find(loc => loc.id)
-  }
+  created() {
+    this.movie = this.$store.getters['movies/movies'].find(
+      (m) => m.id === this.$route.params.id
+    );
+  },
+  computed: {
+    location() {
+      return this.$store.getters['locations/location'](this.movie.locationId);
+    },
+  },
 };
 </script>

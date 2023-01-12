@@ -19,21 +19,15 @@ export default {
   data() {
     return {
       locationObject: null,
-      locationName: '',
     };
   },
   computed: {
+    locationName(){
+      return this.$store.getters['locations/location'](this.location);
+    },
     movieDetailsLink() {
       return '/movies/' + this.id;
     },
-  },
-  created() {
-    this.locationObject = this.$store.getters['locations/locations'].find(
-      (loc) => loc.id === this.location
-    );
-    if (this.locationObject) {
-      this.locationName = this.locationObject.locationName;
-    }
   },
 };
 </script>
