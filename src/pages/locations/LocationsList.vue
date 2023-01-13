@@ -1,5 +1,7 @@
 <template>
-  <section>FILTER</section>
+  <section>
+    <location-search @search-location="returnLocation"> </location-search>
+  </section>
   <base-card>
     <div class="controls">
       <base-button class="flat">Refresh list</base-button>
@@ -19,14 +21,26 @@
 
 <script>
 import LocationItem from '../../components/locations/LocationItem.vue';
+import LocationSearch from '../../components/locations/LocationSearch.vue';
 
 export default {
   components: {
     LocationItem,
+    LocationSearch,
+  },
+  data() {
+    return {
+      searchInput: '',
+    };
   },
   computed: {
     filteredLocations() {
-      return this.$store.getters['locations/locations'];
+      const locs = this.$store.getters['locations/locations'];
+      const search = locs.filter((loc) => {
+        if (loc.locationName.includes(this.searchInput)) return loc;
+      });
+      if (search) return search;
+      else return locs;
     },
     hasLocations() {
       return this.$store.getters['locations/hasLocations'];
@@ -36,6 +50,9 @@ export default {
     confirmInput() {
       // do something
       this.$router.push('/locations');
+    },
+    returnLocation(input) {
+      this.searchInput = input;
     },
   },
 };
