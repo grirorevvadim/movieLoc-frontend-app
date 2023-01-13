@@ -1,5 +1,7 @@
 <template>
-  <section>FILTER</section>
+  <section>
+    <movie-search @search-movie="returnMovie"></movie-search>
+  </section>
   <base-card>
     <div class="controls">
       <base-button class="flat">Refresh list</base-button>
@@ -20,14 +22,26 @@
 
 <script>
 import MovieItem from '../../components/movies/MovieItem.vue';
+import MovieSearch from '../../components/movies/MovieSearch.vue';
 
 export default {
   components: {
     MovieItem,
+    MovieSearch,
+  },
+  data() {
+    return {
+      searchInput: '',
+    };
   },
   computed: {
     filteredMovies() {
-      return this.$store.getters['movies/movies'];
+      const movies = this.$store.getters['movies/movies'];
+      const search = movies.filter((movie) => {
+        if (movie.movieName.includes(this.searchInput)) return movie;
+      });
+      if (search) return search;
+      else return movies;
     },
     hasMovies() {
       return this.$store.getters['movies/hasMovies'];
@@ -37,6 +51,9 @@ export default {
     confirmInput() {
       // do something
       this.$router.push('/movies');
+    },
+    returnMovie(input) {
+      this.searchInput = input;
     },
   },
 };
