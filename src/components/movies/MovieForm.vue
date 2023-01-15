@@ -14,20 +14,22 @@
 
 <script>
 export default {
+  emits:['save-data'],
   data() {
     return {
       movieName: '',
       desc: '',
     };
   },
-  methods:{
-    submit(){
-        const formData= {
-            movieName: this.movieName,
-            desc: this.desc,
-        }
-    }
-  }
+  methods: {
+    submit() {
+      const formData = {
+        movieName: this.movieName,
+        desc: this.desc,
+      };
+      this.$emit('save-data',formData);
+    },
+  },
 };
 </script>
 <style scoped>

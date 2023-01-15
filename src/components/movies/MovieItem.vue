@@ -1,7 +1,7 @@
 <template>
   <li>
     <h3>{{ movieName }}</h3>
-    <h4>Location is: {{ locationName }}</h4>
+    <h4>Location: {{ locationName }}</h4>
     <div class="actions">
       <base-button class="outline" link :to="movieDetailsLink"
         >Details</base-button
