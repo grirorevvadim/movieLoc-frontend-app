@@ -1,33 +1,56 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !movieName.isValid }">
       <label for="name">Movie name</label>
-      <input type="text" id="name" v-model.trim="movieName" />
+      <input type="text" id="name" v-model.trim="movieName.value" @blur="clearValidity('movieName')"/>
+      <p v-if="!movieName.isValid">Movie name must not be empty.</p>
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !desc.isValid }">
       <label for="desc">Movie description</label>
-      <textarea rows="5" id="desc" v-model.trim="desc"></textarea>
+      <textarea rows="5" id="desc" v-model.trim="desc.value" @blur="clearValidity('desc')"></textarea>
+      <p v-if="!desc.isValid">Description must not be empty.</p>
     </div>
+    <p v-if="formValid">Please fix above errors and try again</p>
     <base-button>Create</base-button>
   </form>
 </template>
 
 <script>
 export default {
-  emits:['save-data'],
+  emits: ['save-data'],
   data() {
     return {
-      movieName: '',
-      desc: '',
+      movieName: {
+        value: '',
+        isValid: true,
+      },
+      desc: { value: '', isValid: true },
+      formValid: true,
     };
   },
   methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formValid = true;
+      if (this.movieName.value === '') {
+        this.movieName.isValid = false;
+        this.formValid = false;
+      }
+      if (this.desc.value === '') {
+        this.desc.isValid = false;
+        this.formValid = false;
+      }
+    },
     submit() {
+      this.validateForm();
+      if (!this.formValid) return;
       const formData = {
-        movieName: this.movieName,
-        desc: this.desc,
+        movieName: this.movieName.value,
+        desc: this.desc.value,
       };
-      this.$emit('save-data',formData);
+      this.$emit('save-data', formData);
     },
   },
 };
