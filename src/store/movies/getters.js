@@ -1,8 +1,14 @@
+import axios from "axios";
+
+const MOVIE_URL = "http://localhost:8081/movies";
 export default {
-  movies(state) {
+   movies(state) {
+    axios
+      .get(MOVIE_URL)
+      .then((response) => {
+        state.movies = response.data
+        // console.log(state.movies);
+      })
     return state.movies;
-  },
-  hasMovies(state) {
-    return state.movies && state.movies.length > 0;
   },
 };

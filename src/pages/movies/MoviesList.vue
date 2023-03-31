@@ -4,7 +4,7 @@
   </section>
   <base-card>
     <div class="controls">
-      <base-button class="flat">Refresh list</base-button>
+      <base-button @click="getMovies" class="flat">Refresh list</base-button>
       <base-button link to="/movies/register">Add New Movie</base-button>
     </div>
     <ul v-if="hasMovies">
@@ -23,6 +23,7 @@
 <script>
 import MovieItem from '../../components/movies/MovieItem.vue';
 import MovieSearch from '../../components/movies/MovieSearch.vue';
+import axios from "axios";
 
 export default {
   components: {
@@ -31,29 +32,46 @@ export default {
   },
   data() {
     return {
+      movies:[],
       searchInput: '',
     };
   },
+  mounted() {
+        axios
+      .get('http://localhost:8081/movies')
+      .then((response) => {
+        this.movies = response.data;
+      })
+        console.log(this.movies);
+  },
   computed: {
     filteredMovies() {
-      const movies = this.$store.getters['movies/movies'];
+      const movies = this.movies;
       const search = movies.filter((movie) => {
-        if (movie.movieName.includes(this.searchInput)) return movie;
+        let input =this.searchInput.trim();
+        input = input.toLowerCase();
+        if (movie.movieName.toLowerCase().includes(input)) return movie;
       });
       if (search) return search;
       else return movies;
     },
     hasMovies() {
-      return this.$store.getters['movies/hasMovies'];
+      return this.movies.length > 0;
     },
   },
   methods: {
     confirmInput() {
-      // do something
       this.$router.push('/movies');
     },
     returnMovie(input) {
       this.searchInput = input;
+    },
+     getMovies(){
+      axios
+      .get('http://localhost:8081/movies')
+      .then((response) => {
+        this.movies = response.data;
+      })
     },
   },
 };

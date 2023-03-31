@@ -42,5 +42,8 @@ h2 {
 
 .search input {
   vertical-align: middle;
+  width: 70%;
+  height:1cm;
+  font-size: 1.5rem;
 }
 </style>
