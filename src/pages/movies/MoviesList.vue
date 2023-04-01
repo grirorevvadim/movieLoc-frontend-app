@@ -42,7 +42,6 @@ export default {
       .then((response) => {
         this.movies = response.data;
       })
-        console.log(this.movies);
   },
   computed: {
     filteredMovies() {

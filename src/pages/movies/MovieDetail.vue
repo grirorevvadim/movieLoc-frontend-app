@@ -1,6 +1,6 @@
 <template>
   <section>
-    <base-card>
+    <base-card v-if="isLoaded">
       <h2>{{ movie.movieName }}</h2>
       <h3>{{ location }}</h3>
       <h4>{{ movie.description }}</h4>
@@ -9,16 +9,27 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      movie: null,
+      movie: {
+        movieName:'',
+        location:'',
+        description:''
+      },
+      isLoaded: false,
     };
   },
-  created() {
-    this.movie = this.$store.getters['movies/movies'].find(
-      (m) => m.id === this.$route.params.id
-    );
+ async mounted() {
+      axios
+      .get('http://localhost:8081/movies/'+this.$route.params.id)
+      .then((response) => {
+        this.movie.movieName = response.data.movieName;
+        this.movie.location = response.data.location;
+        this.movie.description = response.data.description;
+        this.isLoaded = true;
+      })
   },
   computed: {
     location() {
