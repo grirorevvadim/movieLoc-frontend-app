@@ -1,6 +1,7 @@
 <template>
   <li>
-    <h3>{{ locationName }}</h3>
+    <h3>{{ city }}</h3>
+    <h3>{{ country }}</h3>
     <div class="actions">
       <base-button link to="/connect">Connect to Movie</base-button>
     </div>
@@ -9,7 +10,7 @@
 
 <script>
 export default {
-  props: ['id', 'locationName'],
+  props: ['id', 'city','country'],
 };
 </script>
 
