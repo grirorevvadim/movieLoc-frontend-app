@@ -1,7 +1,7 @@
 <template>
   <li>
     <h3>{{ movieName }}</h3>
-    <h4>Location: {{ locationName }}</h4>
+    <h4>Location: {{ getLocation(location) }}</h4>
     <div class="actions">
       <base-button class="outline" link :to="movieDetailsLink"
         >Details</base-button
@@ -13,13 +13,25 @@
 
 <script>
 import BaseButton from '../ui/BaseButton.vue';
+import axios from "axios";
 export default {
   components: { BaseButton },
   props: ['id', 'movieName', 'location'],
   data() {
     return {
       locationObject: null,
+      locationCity:''
     };
+  },
+  methods:{
+    getLocation(id){
+      axios
+      .get('http://localhost:8081/locations/'+id)
+      .then((response) => {
+        this.locationCity = response.data.city;
+      })
+      return this.locationCity;
+    },
   },
   computed: {
     locationName(){
