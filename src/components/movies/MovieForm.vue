@@ -10,7 +10,7 @@
       <textarea rows="5" id="desc" v-model.trim="desc.value" @blur="clearValidity('desc')"></textarea>
       <p v-if="!desc.isValid">Description must not be empty.</p>
     </div>
-    <p v-if="formValid">Please fix above errors and try again</p>
+    <p v-if="!formValid">Please fix above errors and try again</p>
     <base-button>Create</base-button>
   </form>
 </template>
