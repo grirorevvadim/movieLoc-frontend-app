@@ -1,10 +1,12 @@
 <template>
   <header>
-    <div class="greeting"><span>Welcome to MovieLoc!</span></div>
-    <img class="image1" :src="image1" />
-    <img class="image2" :src="image2" />
-    <div class="description">
-      Here you can match movies and locations where it was filmed.
+    <div class="first">
+      <div class="greeting"><span>Welcome to MovieLoc!</span></div>
+      <div class="description">
+        <img class="image1" :src="image1" />
+        Here you can match movies and locations where it was filmed.
+        <img class="image2" :src="image2" />
+      </div>
     </div>
     <nav>
       <ul>
@@ -36,22 +38,23 @@ export default {
 .greeting {
   background-color: hwb(198 21% 30%);
   width: 100%;
-  height: 2rem;
+  height: 3rem;
   text-align: center;
-  line-height: 1.5;
-  font-size: 20px;
+  line-height:2;
+  font-size: 22px;
   font-weight: 540;
 }
 .description {
+  margin: 22px;
   width: 100%;
   height: 3rem;
-  font-size: 17px;
+  font-size: 20px;
   text-align: center;
   line-height: 5;
 }
 header {
   width: 100%;
-  height: 10rem;
+  height: 14rem;
   background-color: #cdcde2;
 }
 
@@ -68,17 +71,20 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30%;
 }
 
 li {
-  margin: 0 2rem;
+  margin: 0 0rem;
 }
 
 a {
   text-decoration: none;
   background: transparent;
   border: 1px solid transparent;
+  border-radius: 12px 0px 0px 0px;
   cursor: pointer;
+  border-color: hwb(198 21% 30%);
   color: rgb(0, 0, 0);
   padding: 1rem 3rem;
   display: inline-block;
@@ -104,7 +110,6 @@ img {
 a:hover,
 a:active,
 a.active {
-  border-radius: 12px;
   background-color: hwb(198 21% 30%);
 }
 </style>
